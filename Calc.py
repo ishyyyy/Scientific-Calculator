@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import messagebox  
   
 # setting the initial values of some variables  
-var = ""  
+var = "" 
 A = 0  
 operator = ""  
   
