@@ -1,12 +1,26 @@
-# importing the required libraries  
-import tkinter  
+# Liberaries
+import os
+import sys
+from sys import flags
+import tkinter
+#import sci_calculator 
 from tkinter import *  
 from tkinter import messagebox  
+
   
 # setting the initial values of some variables  
 var = "" 
 A = 0  
-operator = ""  
+operator = "" 
+
+
+#scientific calculator button
+def button_sci_is_Clicked():
+    os.system("python D:\COURSES\BTECH\PROJECT\Calculator\sci_calculator.py")
+    # os.system("python sci_calculator.py")
+    # guiWindow.destroy() 
+    # sys.exit()
+    
   
 # defining the function for Button 1  
 def button_1_is_Clicked():  
@@ -135,12 +149,15 @@ def res():
     global var  
     var2 = var  
     if operator == "+":  
-        a = float((var2.split("+")[1]))  
+        a = float((var2.split("+")[1]))
         x = A + a  
         the_data.set(x)  
         var = str(x)  
     elif operator == "-":  
-        a = float((var2.split("-")[1]))  
+        a = float((var2.split("-")[1])) 
+        print("var = ", var)
+        print("a = ", a)
+        print("A = ", A)
         x = A - a  
         the_data.set(x)  
         var = str(x)  
@@ -152,7 +169,7 @@ def res():
     elif operator == "/":  
         a = float((var2.split("/")[1]))  
         if a == 0:  
-            messagebox.showerror("Division by 0 Not Allowed.")  
+            messagebox.showerror("Error!", "Division by 0 Not Allowed.")  
             A == ""  
             var = ""  
             the_data.set(var)  
@@ -162,32 +179,41 @@ def res():
             var = str(x)  
   
 # creating an object of the Tk() class  
-guiWindow = tkinter.Tk()  
-# setting the size of the window  
-guiWindow.geometry("320x500+400+400")  
-# disabling the resize option for better UI  
-guiWindow.resizable(0, 0)  
-# setting the title of the Calculator window  
-guiWindow.title("Scientific Calculator")  
-  
-# creating the label for the window  
+guiWindow = tkinter.Tk()
+
+# setting the size and position of the window  
+guiWindow.geometry("320x500+400+30") 
+
+
+# we can disable GUI resizing function through this 
+# guiWindow.resizable(0, 0) 
+
+
+# Title of the basic calc window  
+guiWindow.title("Calculator")  
+
+
+# creating the label (display) for the window  
 the_data = StringVar()  
 guiLabel = Label(  
     guiWindow,  
-    text = "Label",  
-    anchor = SE,  
+    text = "Jai Party dega",  
+    anchor = E,  
     font = ("Cambria Math", 20),  
-    textvariable = the_data,  
+    textvariable = the_data,  # text gets override when textvariable is present
     background = "#ffffff",  
-    fg = "#000000"  
+    fg = "#000000",
+    cursor="arrow"
 )  
-# using the pack() method  
+
+# using the pack() method for display or label
 guiLabel.pack(expand = True, fill = "both")  
   
+
 # creating the frames for the buttons  
 # first frame  
-frameOne = Frame(guiWindow, bg = "#000000")  
-frameOne.pack(expand = True, fill = "both") # frame can expand if it gets some space  
+frameOne = Frame(guiWindow, bg = "#F0F0F0")  
+frameOne.pack(expand = True, fill = "x") # frame can expand if it gets some space  
   
 # second frame  
 frameTwo = Frame(guiWindow, bg = "#000000")  
@@ -201,11 +227,28 @@ frameThree.pack(expand = True, fill = "both")
 frameFour = Frame(guiWindow, bg = "#000000")  
 frameFour.pack(expand = True, fill = "both")  
   
+# fifth frame
+frameFive = Frame(guiWindow, bg = "#000000")
+frameFive.pack(expand = True, fill = "both")
+
 # creating buttons for each frame  
-# buttons for first frame  
+# buttons for first frame 
+
+# Change to scientific calculator window
+b = Button(
+    frameOne,
+    text = "Scientific Calculator",
+    font = ("Cambria", 17),
+    # bg="#FF69B4",
+    relief = RAISED, 
+    command = button_sci_is_Clicked  
+)
+
+b.pack()
+
 # button 1  
 buttonONE = Button(  
-    frameOne,  
+    frameTwo,  
     text = "1",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -214,10 +257,12 @@ buttonONE = Button(
 )  
 # placing buttons side by side  
 buttonONE.pack(side = LEFT, expand = True, fill = "both")  
+
+
   
 # button 2  
 buttonTWO = Button(  
-    frameOne,  
+    frameTwo,  
     text = "2",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -229,7 +274,7 @@ buttonTWO.pack(side = LEFT, expand = True, fill = "both")
   
 # button 3  
 buttonTHREE = Button(  
-    frameOne,  
+    frameTwo,  
     text = "3",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -241,7 +286,7 @@ buttonTHREE.pack(side = LEFT, expand = True, fill = "both")
   
 # button C  
 buttonC = Button(  
-    frameOne,  
+    frameTwo,  
     text = "C",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -254,7 +299,7 @@ buttonC.pack(side = LEFT, expand = True, fill = "both")
 # buttons for second frame  
 # button 4  
 buttonFOUR = Button(  
-    frameTwo,  
+    frameThree,  
     text = "4",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -266,7 +311,7 @@ buttonFOUR.pack(side = LEFT, expand = True, fill = "both")
   
 # button 5  
 buttonFIVE = Button(  
-    frameTwo,  
+    frameThree,  
     text = "5",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -278,7 +323,7 @@ buttonFIVE.pack(side = LEFT, expand = True, fill = "both")
   
 # button 6  
 buttonSIX = Button(  
-    frameTwo,  
+    frameThree,  
     text = "6",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -290,7 +335,7 @@ buttonSIX.pack(side = LEFT, expand = True, fill = "both")
   
 # button +  
 buttonADD = Button(  
-    frameTwo,  
+    frameThree,  
     text = "+",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -303,7 +348,7 @@ buttonADD.pack(side = LEFT, expand = True, fill = "both")
 # buttons for third frame  
 # button 7  
 buttonSEVEN = Button(  
-    frameThree,  
+    frameFour,  
     text = "7",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -315,7 +360,7 @@ buttonSEVEN.pack(side = LEFT, expand = True, fill = "both")
   
 # button 8  
 buttonEIGHT = Button(  
-    frameThree,  
+    frameFour,  
     text = "8",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -327,7 +372,7 @@ buttonEIGHT.pack(side = LEFT, expand = True, fill = "both")
   
 # button 9  
 buttonNINE = Button(  
-    frameThree,  
+    frameFour,  
     text = "9",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -339,7 +384,7 @@ buttonNINE.pack(side = LEFT, expand = True, fill = "both")
   
 # button -  
 buttonSUB = Button(  
-    frameThree,  
+    frameFour,  
     text = "-",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -352,7 +397,7 @@ buttonSUB.pack(side = LEFT, expand = True, fill = "both")
 # buttons for fourth frame  
 # button 0  
 buttonZERO = Button(  
-    frameFour,  
+    frameFive,  
     text = "0",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -364,7 +409,7 @@ buttonZERO.pack(side = LEFT, expand = True, fill = "both")
   
 # button *  
 buttonMUL = Button(  
-    frameFour,  
+    frameFive,  
     text = "*",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -376,7 +421,7 @@ buttonMUL.pack(side = LEFT, expand = True, fill = "both")
   
 # button /  
 buttonDIV = Button(  
-    frameFour,  
+    frameFive,  
     text = "/",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -388,7 +433,7 @@ buttonDIV.pack(side = LEFT, expand = True, fill = "both")
   
 # button +  
 buttonEQUAL = Button(  
-    frameFour,  
+    frameFive,  
     text = "=",  
     font = ("Cambria", 22),  
     relief = GROOVE,  
@@ -396,7 +441,14 @@ buttonEQUAL = Button(
     command = res  
 )  
 # placing buttons side by side  
-buttonEQUAL.pack(side = LEFT, expand = True, fill = "both")  
-  
+buttonEQUAL.pack(side = LEFT, expand = True, fill = "both") 
+
+
+# # replacing default tkinter logo
+# guiWindow.wm_attributes('-toolwindow', 'True') # it is used to completely remove the logo
+photo = PhotoImage(file = 'D:\COURSES\BTECH\PROJECT\Calculator\logo\logo.png')
+guiWindow.iconphoto(False, photo)
+
+
 # running the GUI  
 guiWindow.mainloop()
